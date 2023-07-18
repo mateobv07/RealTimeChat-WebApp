@@ -19,5 +19,8 @@
         },
         "editor.defaultFormatter": "ms-python.black-formatter"
 
+    },
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
     }
 }
