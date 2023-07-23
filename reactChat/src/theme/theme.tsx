@@ -1,4 +1,4 @@
-import { createTheme } from "@mui/material";
+import { createTheme, responsiveFontSizes } from "@mui/material";
 
 declare module "@mui/material/styles" {
   interface Theme {
@@ -18,7 +18,21 @@ export const createMuiTheme = () => {
     primaryAppBar: {
       height: 50,
     },
+
+    typography: {
+      fontFamily: ["IBM Plex Sans", "sans-serif"].join(","),
+    },
+
+    components: {
+      MuiAppBar: {
+        defaultProps: {
+          color: "default",
+          elevation: 0,
+        },
+      },
+    },
   });
+  theme = responsiveFontSizes(theme);
   return theme;
 };
 
