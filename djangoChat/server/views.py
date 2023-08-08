@@ -24,8 +24,8 @@ class ServerListViewSet(viewsets.ViewSet):
         )
 
         # Check if the user is authenticated before proceeding.
-        if not request.user.is_authenticated:
-            raise AuthenticationFailed()
+        # if not request.user.is_authenticated:
+        #    raise AuthenticationFailed()
 
         # Filter the queryset based on the provided category, if any.
         if category:
