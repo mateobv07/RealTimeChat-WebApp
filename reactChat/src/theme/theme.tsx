@@ -5,14 +5,10 @@ declare module "@mui/material/styles" {
     primaryAppBar: {
       height: number;
     };
-  }
-  interface Theme {
     primaryDrawer: {
       width: number;
       closedWidth: number;
     };
-  }
-  interface Theme {
     secondaryDrawer: {
       width: number;
     };
@@ -21,11 +17,25 @@ declare module "@mui/material/styles" {
     primaryAppBar: {
       height: number;
     };
+    primaryDrawer: {
+      width: number;
+      closedWidth: number;
+    };
+    secondaryDrawer: {
+      width: number;
+    };
   }
 }
 
 export const createMuiTheme = () => {
   let theme = createTheme({
+    typography: {
+      fontFamily: ["IBM Plex Sans", "sans-serif"].join(","),
+      body1: {
+        fontWeight: 500,
+        letterSpacing: "-0.5px",
+      },
+    },
     primaryAppBar: {
       height: 50,
     },
@@ -36,10 +46,6 @@ export const createMuiTheme = () => {
     secondaryDrawer: {
       width: 240,
     },
-    typography: {
-      fontFamily: ["IBM Plex Sans", "sans-serif"].join(","),
-    },
-
     components: {
       MuiAppBar: {
         defaultProps: {

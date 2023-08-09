@@ -1,9 +1,12 @@
 import { Box, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
+import React from "react";
 
-import axios from "axios";
+type SecondaryDrawerProps = {
+  children: React.ReactNode;
+};
 
-const SecondaryDrawer = () => {
+const SecondaryDrawer = ({ children }): SecondaryDrawerProps => {
   const theme = useTheme();
 
   return (
@@ -17,11 +20,7 @@ const SecondaryDrawer = () => {
         overflow: "auto",
       }}
     >
-      {[...Array(100)].map((_, i) => (
-        <Typography key={i} paragraph>
-          {i + 1}
-        </Typography>
-      ))}
+      {children}
     </Box>
   );
 };

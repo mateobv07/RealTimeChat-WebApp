@@ -3,14 +3,20 @@ import PrimaryAppBar from "./templates/PrimaryAppBar";
 import PrimaryDrawer from "./templates/PrimaryDrawer";
 import SecondaryDrawer from "./templates/SecondaryDrawer";
 import Main from "./templates/Main";
+import PopularChannels from "../components/PrimaryDrawer/PopularChannels";
+import ExploreCategories from "../components/SecondaryDraw/ExploreCategories";
 
 const Home = () => {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <PrimaryAppBar />
-      <PrimaryDrawer></PrimaryDrawer>
-      <SecondaryDrawer />
+      <PrimaryDrawer>
+        <PopularChannels open={false} />
+      </PrimaryDrawer>
+      <SecondaryDrawer>
+        <ExploreCategories />
+      </SecondaryDrawer>
       <Main />
     </Box>
   );

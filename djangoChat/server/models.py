@@ -10,15 +10,15 @@ from .validators import (
 
 
 def category_icon_upload_path(instance, filename):
-    return "category/{instance.id}/category_icon/{filename}"
+    return f"category/{instance.id}/category_icon/{filename}"
 
 
 def server_icon_upload_path(instance, filename):
-    return "server/{instance.id}/server_icon/{filename}"
+    return f"server/{instance.id}/server_icon/{filename}"
 
 
 def server_banner_upload_path(instance, filename):
-    return "server/{instance.id}/server_banner/{filename}"
+    return f"server/{instance.id}/server_banner/{filename}"
 
 
 class Category(models.Model):
@@ -74,7 +74,7 @@ class Server(models.Model):
 
     def save(self, *args, **kwargs):
         if self.id:
-            existing = get_object_or_404(Category, id=self.id)
+            existing = get_object_or_404(Server, id=self.id)
             if existing.icon != self.icon:
                 existing.icon.delete(save=False)
             if existing.banner != self.banner:
@@ -82,7 +82,7 @@ class Server(models.Model):
         super(Server, self).save(*args, **kwargs)
 
     @receiver(models.signals.pre_delete, sender="server.Server")
-    def category_delete_files(sender, instance, **kwargs):
+    def server_delete_files(sender, instance, **kwargs):
         for field in instance._meta.fields:
             if field.name == "icon" or field.name == "banner":
                 file = getattr(instance, field.name)

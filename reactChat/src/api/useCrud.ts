@@ -15,15 +15,15 @@ const useCrud = <T>(initialData: T[], apiURL: string):CrudInterface<T>  => {
     const [error, setError] = useState<Error | null>(null);
     const [isLoading, setIsLoading] = useState(false);
 
-    const fetchData = async () => {
+    const fetchData = async () =>{
         setIsLoading(true);
         try {
             const response = await jwtAxios.get(`${BASE_URL}${apiURL}`, {})
-            const data = response.data;
-            setData(data);
-            setError(null);
-            setIsLoading(false);
-            return data;
+            const newData = response?.data
+            setData(newData)
+            setError(null)
+            setIsLoading(false)
+            return newData;
         } catch (error: any) {
             if (error.response && error.response.status === 400) {
                 setError(new Error("400"));
