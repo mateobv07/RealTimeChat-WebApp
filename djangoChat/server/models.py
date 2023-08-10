@@ -33,6 +33,7 @@ class Category(models.Model):
             existing = get_object_or_404(Category, id=self.id)
             if existing.icon != self.icon:
                 existing.icon.delete(save=False)
+        self.name = self.name.lower()
         super(Category, self).save(*args, **kwargs)
 
     @receiver(models.signals.pre_delete, sender="server.Category")
@@ -79,6 +80,7 @@ class Server(models.Model):
                 existing.icon.delete(save=False)
             if existing.banner != self.banner:
                 existing.banner.delete(save=False)
+        self.name = self.name.lower()
         super(Server, self).save(*args, **kwargs)
 
     @receiver(models.signals.pre_delete, sender="server.Server")

@@ -4,13 +4,13 @@ from rest_framework import viewsets
 from rest_framework.exceptions import AuthenticationFailed, ValidationError
 from rest_framework.response import Response
 
-from .models import Server
+from .models import Category, Server
 from .schema import server_list_docs
 from .serializer import CategorySerializer, ServerSerializer
 
 
 class CategoryListViewSet(viewsets.ViewSet):
-    queryset = Server.objects.all()
+    queryset = Category.objects.all()
 
     @extend_schema(responses=CategorySerializer)
     def list(self, rquest):

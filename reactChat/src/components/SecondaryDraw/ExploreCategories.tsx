@@ -57,7 +57,7 @@ const ExploreCategories = () => {
             sx={{ display: "block" }}
           >
             <Link
-              to={`/expore/${category.name}`}
+              to={`/explore/${category.name}`}
               style={{ textDecoration: "none", color: "inherit" }}
             >
               <ListItemButton sx={{ minHeight: 48 }}>

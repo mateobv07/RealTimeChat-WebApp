@@ -6,7 +6,7 @@ type SecondaryDrawerProps = {
   children: React.ReactNode;
 };
 
-const SecondaryDrawer = ({ children }): SecondaryDrawerProps => {
+const SecondaryDrawer = ({ children }: SecondaryDrawerProps) => {
   const theme = useTheme();
 
   return (
