@@ -11,6 +11,7 @@ import {
 import { useTheme } from "@mui/material/styles";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useEffect, useState } from "react";
+import ExploreCategories from "../../components/SecondaryDraw/ExploreCategories";
 
 const PrimaryAppBar = () => {
   const [sideMenu, setSideMenu] = useState(false);
@@ -55,11 +56,17 @@ const PrimaryAppBar = () => {
           open={sideMenu}
           onClose={() => setSideMenu(false)}
         >
-          {[...Array(100)].map((_, i) => (
-            <Typography key={i} paragraph>
-              {i + 1}
-            </Typography>
-          ))}
+          <Box
+            sx={{
+              paddingTop: `${theme.primaryAppBar.height}px`,
+              minWidth: 200,
+            }}
+            role="presentation"
+            onClick={() => setSideMenu(false)}
+            onKeyDown={() => setSideMenu(false)}
+          >
+            <ExploreCategories />
+          </Box>
         </Drawer>
 
         <Link href="/" underline="none" color="inherit">

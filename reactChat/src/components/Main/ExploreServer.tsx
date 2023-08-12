@@ -23,6 +23,7 @@ interface Server {
   name: string;
   description: string;
   icon: string;
+  banner: string;
   category: string;
 }
 
@@ -46,8 +47,8 @@ const ExploreServers = () => {
             display: {
               sm: "block",
               fontWeight: 700,
-              fontSize: "48px",
               letterSpacing: "-1.5px",
+              textTransform: "capitalize",
             },
             textAlign: { xs: "center", sm: "left" },
           }}
@@ -65,7 +66,6 @@ const ExploreServers = () => {
             display: {
               sm: "block",
               fontWeight: 700,
-              fontSize: "48px",
               letterSpacing: "-0.5px",
             },
             textAlign: { xs: "center", sm: "left" },
@@ -84,7 +84,7 @@ const ExploreServers = () => {
       </Typography>
       <Grid container spacing={{ xs: 0, sm: 2 }}>
         {data.map((server) => (
-          <Grid item key={server.id} xs={12} sm={12} md={6} lg={3}>
+          <Grid item key={server.id} xs={12} sm={12} md={6} lg={4}>
             <Card
               sx={{
                 height: "100%",
@@ -92,6 +92,7 @@ const ExploreServers = () => {
                 flexDirection: "column",
                 boxShadow: "none",
                 backgroundImage: "none",
+                borderRadius: 0,
               }}
             >
               <Link
@@ -99,7 +100,11 @@ const ExploreServers = () => {
                 style={{ textDecoration: "none", color: "inherit" }}
               >
                 <CardMedia
-                  image="https://source.unsplash.com/random/"
+                  image={
+                    server.banner
+                      ? `${MEDIA_URL}${server.banner}`
+                      : "https://source.unsplash.com/ranom/"
+                  }
                   alt="server image"
                   component="img"
                   sx={{ display: { xs: "none", sm: "block" } }}
