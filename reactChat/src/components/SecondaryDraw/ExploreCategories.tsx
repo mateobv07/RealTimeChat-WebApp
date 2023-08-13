@@ -5,9 +5,9 @@ import {
   ListItemIcon,
   ListItemText,
   Box,
-  useTheme,
   Typography,
 } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import useCrud from "../../api/useCrud";
 import { useEffect } from "react";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
@@ -24,6 +24,7 @@ interface Category {
 
 const ExploreCategories = () => {
   const theme = useTheme();
+  const isDarkMode = theme.palette.mode === "dark";
   const { data, error, isLoading, fetchData } = useCrud<Category>(
     [],
     "/server/category/"
@@ -69,6 +70,7 @@ const ExploreCategories = () => {
                       style={{
                         width: "25px",
                         height: "25px",
+                        filter: isDarkMode ? "invert(100%)" : "none",
                         display: "block",
                         margin: "auto",
                       }}
