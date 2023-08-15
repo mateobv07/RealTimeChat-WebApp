@@ -22,7 +22,7 @@ const router = createBrowserRouter(
 const App: React.FC = () => {
   return (
     <ToggleColorMode>
-      <RouterProvider router={router} />;
+      <RouterProvider router={router} />
     </ToggleColorMode>
   );
 };
