@@ -14,7 +14,7 @@ const router = createBrowserRouter(
     <Route>
       <Route path="/" element={<Home />} />
       <Route path="/explore/:categoryName" element={<Explore />} />
-      <Route path="/server" element={<Server />} />
+      <Route path="/server/:serverId/:channelId?" element={<Server />} />
     </Route>
   )
 );
