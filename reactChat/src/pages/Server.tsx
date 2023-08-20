@@ -22,7 +22,7 @@ interface Server {
     server: number;
     topic: string;
     owner: number;
-  };
+  }[];
 }
 
 const Server = () => {
@@ -41,17 +41,24 @@ const Server = () => {
     fetchData();
   }, []);
 
-  // const isChannel = (): Boolean => {
-  //   if (!channelId) {
-  //     return true;
-  //   }
+  // Check if channelID is valid by searching for it in fetched data.
+  const isChannel = (): Boolean => {
+    if (!channelId) {
+      return true;
+    }
 
-  //   return data.some((server) =>
-  //     server.channel_server.some(
-  //       (channel) => channel.id === parseInt(channelId)
-  //     )
-  //   );
-  // };
+    return data.some((server) =>
+      server.channel_server.some(
+        (channel) => channel.id === parseInt(channelId)
+      )
+    );
+  };
+
+  useEffect(() => {
+    if (!isChannel()) {
+      navigate(`/server/${serverId}`);
+    }
+  }, [isChannel, channelId]);
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -61,7 +68,7 @@ const Server = () => {
         <UserServers open={false} data={data} />
       </PrimaryDrawer>
       <SecondaryDrawer>
-        <ServerChannels />
+        <ServerChannels data={data} />
       </SecondaryDrawer>
       <Main>
         <MessageInterface />

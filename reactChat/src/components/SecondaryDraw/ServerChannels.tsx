@@ -8,31 +8,33 @@ import {
   Typography,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import useCrud from "../../api/useCrud";
 import { useEffect } from "react";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
-import Avatar from "@mui/material/Avatar";
 import { MEDIA_URL } from "../../config";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
-interface Category {
+interface Server {
   id: number;
   name: string;
-  description: string;
+  category: string;
   icon: string;
+  channel_server: {
+    id: number;
+    name: string;
+    server: number;
+    topic: string;
+    owner: number;
+  }[];
 }
 
-const ServerChannels = () => {
-  const theme = useTheme();
-  const isDarkMode = theme.palette.mode === "dark";
-  const { data, error, isLoading, fetchData } = useCrud<Category>(
-    [],
-    "/server/category/"
-  );
+interface ServerChannelsProps {
+  data: Server[];
+}
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+const ServerChannels = (props: ServerChannelsProps) => {
+  const { data } = props;
+  const theme = useTheme();
+  const { serverId } = useParams();
+
   return (
     <>
       <Box
@@ -47,36 +49,30 @@ const ServerChannels = () => {
           backgroundColor: theme.palette.background.default,
         }}
       >
-        Explore
+        <Typography
+          variant="body1"
+          style={{
+            textOverflow: "ellipsis",
+            overflow: "hidden",
+            whiteSpace: "nowrap",
+          }}
+        >
+          {data?.[0]?.name ? data[0].name : "Server"}
+        </Typography>
       </Box>
       <List sx={{ py: 0 }}>
-        {data.map((category) => (
+        {data?.[0]?.channel_server.map((obj) => (
           <ListItem
             disablePadding
-            key={category.id}
+            key={obj.id}
             dense={true}
-            sx={{ display: "block" }}
+            sx={{ display: "block", maxHeight: "40px" }}
           >
             <Link
-              to={`/explore/${category.name}`}
+              to={`/server/${serverId}/${obj.id}`}
               style={{ textDecoration: "none", color: "inherit" }}
             >
               <ListItemButton sx={{ minHeight: 48 }}>
-                <ListItemIcon sx={{ minWidth: 0, justifyContent: "center" }}>
-                  <ListItemAvatar sx={{ minWidth: "0px" }}>
-                    <img
-                      alt="server Icon"
-                      src={`${MEDIA_URL}${category.icon}`}
-                      style={{
-                        width: "25px",
-                        height: "25px",
-                        filter: isDarkMode ? "invert(100%)" : "none",
-                        display: "block",
-                        margin: "auto",
-                      }}
-                    />
-                  </ListItemAvatar>
-                </ListItemIcon>
                 <ListItemText
                   primary={
                     <Typography
@@ -84,7 +80,7 @@ const ServerChannels = () => {
                       textAlign="start"
                       paddingLeft={1}
                     >
-                      {category.name}
+                      {obj.name}
                     </Typography>
                   }
                 ></ListItemText>

@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "account",
     "server",
+    "webChat",
 ]
 
 MIDDLEWARE = [

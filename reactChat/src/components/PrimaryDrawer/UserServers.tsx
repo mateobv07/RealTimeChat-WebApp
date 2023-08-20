@@ -42,7 +42,7 @@ const UserServers: React.FC<Props> = ({ open, data }) => {
         </Typography>
       </Box>
       <List>
-        {data.map((item) => (
+        {data?.map((item) => (
           <ListItem
             key={item.id}
             disablePadding

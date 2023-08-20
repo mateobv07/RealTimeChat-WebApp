@@ -1,28 +1,52 @@
 from asgiref.sync import async_to_sync
 from channels.generic.websocket import JsonWebsocketConsumer
+from django.contrib.auth import get_user_model
+
+from .models import Conversation, Message
+
+User = get_user_model()
 
 
 class WebChatConsumer(JsonWebsocketConsumer):
     # groups = ["broadcast"]
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.room_name = "testserver"
+        self.channel_id = None
+        self.user = None
 
     def connect(self):
         self.accept()
+        self.channel_id = self.scope["url_route"]["kwargs"]["channelId"]
+        self.user = User.objects.get(id=1)
+
         async_to_sync(self.channel_layer.group_add)(
-            self.room_name,
+            self.channel_id,
             self.channel_name,
         )
         # To reject the connection, call:
         # self.close()
 
     def receive_json(self, content):
+        conversation, created = Conversation.objects.get_or_create(
+            channel_id=self.channel_id
+        )
+
+        new_message = Message.objects.create(
+            conversation=conversation,
+            sender=self.user,
+            content=content["message"],
+        )
+
         async_to_sync(self.channel_layer.group_send)(
-            self.room_name,
+            self.channel_id,
             {
                 "type": "chat.message",
-                "new_message": content["message"],
+                "new_message": {
+                    "id": new_message.id,
+                    "sender": new_message.sender.username,
+                    "content": new_message.content,
+                    "timestamp": new_message.timestamp.isoformat(),
+                },
             },
         )
 
@@ -30,5 +54,7 @@ class WebChatConsumer(JsonWebsocketConsumer):
         self.send_json(event)
 
     def disconnect(self, close_code):
-        # Called when the socket closes
-        pass
+        async_to_sync(self.channel_layer.group_discard)(
+            self.channel_id, self.channel_name
+        )
+        super().disconnect(close_code)
