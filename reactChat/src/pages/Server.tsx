@@ -16,6 +16,7 @@ interface Server {
   name: string;
   category: string;
   icon: string;
+  description: string;
   channel_server: {
     id: number;
     name: string;
@@ -71,7 +72,7 @@ const Server = () => {
         <ServerChannels data={data} />
       </SecondaryDrawer>
       <Main>
-        <MessageInterface />
+        <MessageInterface data={data} />
       </Main>
     </Box>
   );
