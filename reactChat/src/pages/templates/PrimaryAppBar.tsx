@@ -52,24 +52,6 @@ const PrimaryAppBar = () => {
           </IconButton>
         </Box>
 
-        <Drawer
-          anchor="left"
-          open={sideMenu}
-          onClose={() => setSideMenu(false)}
-        >
-          <Box
-            sx={{
-              paddingTop: `${theme.primaryAppBar.height}px`,
-              minWidth: 200,
-            }}
-            role="presentation"
-            onClick={() => setSideMenu(false)}
-            onKeyDown={() => setSideMenu(false)}
-          >
-            <ExploreCategories />
-          </Box>
-        </Drawer>
-
         <Link href="/" underline="none" color="inherit">
           <Typography
             variant="h6"

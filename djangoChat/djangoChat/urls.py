@@ -22,6 +22,10 @@ from rest_framework.routers import DefaultRouter
 from server.views import CategoryListViewSet, ServerListViewSet
 from webChat.consumer import WebChatConsumer
 from webChat.views import MessageViewSet
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 
 router = DefaultRouter()
 router.register("api/server", ServerListViewSet)
@@ -32,6 +36,8 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/docs/schema/", SpectacularAPIView.as_view(), name="schema"),
     path("api/docs/schema/ui", SpectacularSwaggerView.as_view()),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ] + router.urls
 
 websockets_url_patterns = [

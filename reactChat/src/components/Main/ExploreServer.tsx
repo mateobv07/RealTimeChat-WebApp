@@ -83,77 +83,78 @@ const ExploreServers = () => {
         Recommended Channels
       </Typography>
       <Grid container spacing={{ xs: 0, sm: 2 }}>
-        {data.map((server) => (
-          <Grid item key={server.id} xs={12} sm={12} md={6} lg={4}>
-            <Card
-              sx={{
-                height: "100%",
-                display: "flex",
-                flexDirection: "column",
-                boxShadow: "none",
-                backgroundImage: "none",
-                borderRadius: 0,
-              }}
-            >
-              <Link
-                to={`/server/${server.id}`}
-                style={{ textDecoration: "none", color: "inherit" }}
+        {data &&
+          data.map((server) => (
+            <Grid item key={server.id} xs={12} sm={12} md={6} lg={4}>
+              <Card
+                sx={{
+                  height: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  boxShadow: "none",
+                  backgroundImage: "none",
+                  borderRadius: 0,
+                }}
               >
-                <CardMedia
-                  image={
-                    server.banner
-                      ? `${MEDIA_URL}${server.banner}`
-                      : "https://source.unsplash.com/ranom/"
-                  }
-                  alt="server image"
-                  component="img"
-                  sx={{ display: { xs: "none", sm: "block" } }}
-                />
-                <CardContent
-                  sx={{
-                    flexGrow: 1,
-                    p: 0,
-                    "&:last-child": { paddingBottom: 0 },
-                  }}
+                <Link
+                  to={`/server/${server.id}`}
+                  style={{ textDecoration: "none", color: "inherit" }}
                 >
-                  <List>
-                    <ListItem disablePadding>
-                      <ListItemIcon sx={{ minWidth: 0 }}>
-                        <ListItemAvatar sx={{ minWidth: "50px" }}>
-                          <Avatar
-                            alt="serverIcon"
-                            src={`${MEDIA_URL}${server.icon}`}
-                          />
-                        </ListItemAvatar>
-                      </ListItemIcon>
-                      <ListItemText
-                        primary={
-                          <Typography
-                            variant="body2"
-                            textAlign="start"
-                            sx={{
-                              textOverflow: "ellipsis",
-                              overflow: "hidden",
-                              whiteSpace: "nowrap",
-                              fontWeight: 700,
-                            }}
-                          >
-                            {server.name}
-                          </Typography>
-                        }
-                        secondary={
-                          <Typography variant="body2">
-                            {server.category}
-                          </Typography>
-                        }
-                      />
-                    </ListItem>
-                  </List>
-                </CardContent>
-              </Link>
-            </Card>
-          </Grid>
-        ))}
+                  <CardMedia
+                    image={
+                      server.banner
+                        ? `${MEDIA_URL}${server.banner}`
+                        : "https://source.unsplash.com/ranom/"
+                    }
+                    alt="server image"
+                    component="img"
+                    sx={{ display: { xs: "none", sm: "block" } }}
+                  />
+                  <CardContent
+                    sx={{
+                      flexGrow: 1,
+                      p: 0,
+                      "&:last-child": { paddingBottom: 0 },
+                    }}
+                  >
+                    <List>
+                      <ListItem disablePadding>
+                        <ListItemIcon sx={{ minWidth: 0 }}>
+                          <ListItemAvatar sx={{ minWidth: "50px" }}>
+                            <Avatar
+                              alt="serverIcon"
+                              src={`${MEDIA_URL}${server.icon}`}
+                            />
+                          </ListItemAvatar>
+                        </ListItemIcon>
+                        <ListItemText
+                          primary={
+                            <Typography
+                              variant="body2"
+                              textAlign="start"
+                              sx={{
+                                textOverflow: "ellipsis",
+                                overflow: "hidden",
+                                whiteSpace: "nowrap",
+                                fontWeight: 700,
+                              }}
+                            >
+                              {server.name}
+                            </Typography>
+                          }
+                          secondary={
+                            <Typography variant="body2">
+                              {server.category}
+                            </Typography>
+                          }
+                        />
+                      </ListItem>
+                    </List>
+                  </CardContent>
+                </Link>
+              </Card>
+            </Grid>
+          ))}
       </Grid>
     </Container>
   );

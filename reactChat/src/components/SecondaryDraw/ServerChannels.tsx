@@ -39,7 +39,7 @@ const ServerChannels = (props: ServerChannelsProps) => {
     <>
       <Box
         sx={{
-          height: "50px",
+          height: theme.primaryAppBar.height + 1,
           display: "flex",
           alignItems: "center",
           px: 2,

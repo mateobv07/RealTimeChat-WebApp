@@ -52,68 +52,69 @@ const PopularChannels: React.FC<Props> = ({ open }) => {
         </Typography>
       </Box>
       <List>
-        {data.map((item) => (
-          <ListItem
-            key={item.id}
-            disablePadding
-            sx={{ display: "block" }}
-            dense={true}
-          >
-            <Link
-              to={`/server/${item.id}`}
-              style={{ textDecoration: "none", color: "inherit" }}
+        {data &&
+          data.map((item) => (
+            <ListItem
+              key={item.id}
+              disablePadding
+              sx={{ display: "block" }}
+              dense={true}
             >
-              <ListItemButton sx={{ minHeight: 0 }}>
-                <ListItemIcon sx={{ minWidth: 0, justifyContent: "center" }}>
-                  <ListItemAvatar sx={{ minWidth: 50 }}>
-                    <Avatar
-                      alt="Server Icon"
-                      src={`${MEDIA_URL}${item.icon}`}
-                    />
-                  </ListItemAvatar>
-                </ListItemIcon>
-                <ListItemIcon>
-                  <ListItemText
-                    primary={
-                      <Typography
-                        variant="body2"
-                        sx={{
-                          fontWeight: 700,
-                          lineHeight: 1.2,
+              <Link
+                to={`/server/${item.id}`}
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
+                <ListItemButton sx={{ minHeight: 0 }}>
+                  <ListItemIcon sx={{ minWidth: 0, justifyContent: "center" }}>
+                    <ListItemAvatar sx={{ minWidth: 50 }}>
+                      <Avatar
+                        alt="Server Icon"
+                        src={`${MEDIA_URL}${item.icon}`}
+                      />
+                    </ListItemAvatar>
+                  </ListItemIcon>
+                  <ListItemIcon>
+                    <ListItemText
+                      primary={
+                        <Typography
+                          variant="body2"
+                          sx={{
+                            fontWeight: 700,
+                            lineHeight: 1.2,
+                            textOverflow: "ellipsis",
+                            overflow: "hidden",
+                            whiteSpace: "nowrap",
+                          }}
+                        >
+                          {item.name}
+                        </Typography>
+                      }
+                      secondary={
+                        <Typography
+                          variant="body2"
+                          sx={{
+                            fontWeight: 500,
+                            lineHeight: 1.2,
+                            color: "textSecondary",
+                          }}
+                        >
+                          {item.category}
+                        </Typography>
+                      }
+                      sx={{ opacity: open ? 1 : 0 }}
+                      primaryTypographyProps={{
+                        sx: {
                           textOverflow: "ellipsis",
                           overflow: "hidden",
                           whiteSpace: "nowrap",
-                        }}
-                      >
-                        {item.name}
-                      </Typography>
-                    }
-                    secondary={
-                      <Typography
-                        variant="body2"
-                        sx={{
-                          fontWeight: 500,
-                          lineHeight: 1.2,
-                          color: "textSecondary",
-                        }}
-                      >
-                        {item.category}
-                      </Typography>
-                    }
-                    sx={{ opacity: open ? 1 : 0 }}
-                    primaryTypographyProps={{
-                      sx: {
-                        textOverflow: "ellipsis",
-                        overflow: "hidden",
-                        whiteSpace: "nowrap",
-                      },
-                    }}
-                  />
-                </ListItemIcon>
-              </ListItemButton>
-            </Link>
-          </ListItem>
-        ))}
+                        },
+                      }}
+                    />
+                  </ListItemIcon>
+                </ListItemButton>
+              </Link>
+            </ListItem>
+          ))}
       </List>
     </>
   );
